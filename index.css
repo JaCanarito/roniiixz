@@ -19,7 +19,7 @@ body {
 .fondo-blur {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100vh; z-index: -1;
-    background-image: url('imagenes/descarga.jpg'); /* Archivo local */
+    background-image: url('imagenes/Guapos.jpeg'); /* Archivo local */
     background-size: cover; background-position: center;
     filter: blur(3px); transform: scale(1.05); 
 }
