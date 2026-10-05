@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis Redes Sociales</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <!-- Capa del fondo sutilmente difuminado -->
+    <div class="fondo-blur"></div>
+
+    <!-- Contenedor principal que centra la tarjeta -->
+    <main class="contenido-centrado">
+        
+        <!-- Tarjeta de presentación más grande -->
+        <div class="perfil-card-gigante">
+            <!-- 🔴 NUEVO: Foto de perfil circular -->
+            <div class="contenedor-avatar">
+                <img src="imagenes/ronix.jpg" alt="Foto de perfil" class="avatar-img">
+            </div>
+
+            <h1>Roniiixz</h1>
+            <p>Haz clic en los iconos para visitar mis redes</p>
+
+            <div class="enlaces-contenedor">
+                
+                <!-- Twitch -->
+                <div class="fila-red">
+                    <a href="https://www.twitch.tv/roniiixz" target="_blank" class="recuadro-logo">
+                        <img src="imagenes/twitch.png" alt="Twitch" class="logo-red">
+                    </a>
+                    <span class="nombre-cuenta">Twitch / @roniiixz</span>
+                </div>
+
+                <!-- YouTube -->
+                <div class="fila-red">
+                    <a href="https://www.youtube.com/@roniiixz" target="_blank" class="recuadro-logo">
+                        <img src="imagenes/youtube.png" alt="YouTube" class="logo-red">
+                    </a>
+                    <span class="nombre-cuenta">YouTube / @roniiix</span>
+                </div>
+
+                <!-- TikTok -->
+                <div class="fila-red">
+                    <a href="https://www.tiktok.com/@roniiiiixz" target="_blank" class="recuadro-logo">
+                        <img src="imagenes/tiktok.png" alt="TikTok" class="logo-red">
+                    </a>
+                    <span class="nombre-cuenta">TikTok / @roniiix</span>
+                </div>
+
+                <!-- Instagram -->
+                <div class="fila-red">
+                    <a href="https://www.instagram.com/roniiiixzz/" target="_blank" class="recuadro-logo">
+                        <img src="imagenes/instagram.png" alt="Instagram" class="logo-red">
+                    </a>
+                    <span class="nombre-cuenta">Instagram / @roniiiixzz</span>
+                </div>
+
+                <div class="fila-red">
+                    <a href="https://discord.gg/cjT6SfzP4r" target="_blank" class="recuadro-logo">
+                        <img src="imagenes/discord.png" alt="Discord" class="logo-red">
+                    </a>
+                    <span class="nombre-cuenta">Discord / Roniiixz Community</span>
+                </div>
+
+                <!-- 🔴 NUEVO: Botón de Colaboradores -->
+                <div class="contenedor-colaboradores-btn">
+                    <button class="btn-colaboradores" onclick="abrirColaboradores()">
+                        <i class="fa-solid fa-users"></i> Colaboradores
+                    </button>
+                </div>
+
+
+            </div>
+        </div>
+    </main>
+
+    <!-- VENTANA FLOTANTE (TARJETA DE COLABORADORES) -->
+    <div id="modalColaboradores" class="modal-overlay hidden">
+        <div class="tarjeta-modal-contenido">
+            
+            <div class="modal-header">
+                <h2>Colaboradores</h2>
+                <button class="btn-cerrar-modal" onclick="cerrarColaboradores()">&times;</button>
+            </div>
+
+            <div class="lista-colaboradores">
+                
+                <!-- Colaborador 1 -->
+                <div class="item-colaborador">
+                    <!-- 🔴 NUEVO: El avatar ahora es un enlace a su Twitch -->
+                    <a href="https://www.tiktok.com/@eelfeergaa6" target="_blank" class="enlace-avatar-colaborador">
+                        <img src="imagenes/fergita.jpeg" alt="Colaborador 1" class="avatar-colaborador" onerror="this.src='perfil.png'">
+                    </a>
+                    <div class="info-colaborador">
+                        <h3>@eelfeergaa</h3>
+                        <div class="redes-colaborador">
+                            <a href="https://twitch.tv" target="_blank" title="Twitch"><i class="fa-brands fa-twitch"></i></a>
+                            <a href="https://twitter.com" target="_blank" title="Twitter/X"><i class="fa-brands fa-x-twitter"></i></a>
+                            <a href="https://instagram.com" target="_blank" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Colaborador 2 -->
+                <div class="item-colaborador">
+                    <!-- 🔴 NUEVO: El avatar ahora es un enlace a su YouTube -->
+                    <a href="https://www.tiktok.com/@mauroortiz444" target="_blank" class="enlace-avatar-colaborador">
+                        <img src="imagenes/mauro.jpeg" alt="Colaborador 2" class="avatar-colaborador" onerror="this.src='perfil.png'">
+                    </a>
+                    <div class="info-colaborador">
+                        <h3>@Maurosaurio</h3>
+                        <div class="redes-colaborador">
+                            <a href="https://youtube.com" target="_blank" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                            <a href="https://tiktok.com" target="_blank" title="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Colaborador 3 -->
+                <div class="item-colaborador">
+                    <!-- 🔴 NUEVO: El avatar ahora es un enlace a su YouTube -->
+                    <a href="https://www.tiktok.com/@javiblanco.8" target="_blank" class="enlace-avatar-colaborador">
+                        <img src="imagenes/javi.jpeg" alt="Colaborador 2" class="avatar-colaborador" onerror="this.src='perfil.png'">
+                    </a>
+                    <div class="info-colaborador">
+                        <h3>@javiblanco.8</h3>
+                        <div class="redes-colaborador">
+                            <a href="https://youtube.com" target="_blank" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                            <a href="https://tiktok.com" target="_blank" title="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Script rápido para abrir/cerrar la tarjeta de colaboradores -->
+    <script>
+        function abrirColaboradores() {
+            document.getElementById('modalColaboradores').classList.remove('hidden');
+        }
+        function cerrarColaboradores() {
+            document.getElementById('modalColaboradores').classList.add('hidden');
+        }
+        // Cerrar si hacen clic fuera de la tarjeta
+        window.onclick = function(event) {
+            const modal = document.getElementById('modalColaboradores');
+            if (event.target == modal) {
+                cerrarColaboradores();
+            }
+        }
+    </script>
+</body>
+</html>

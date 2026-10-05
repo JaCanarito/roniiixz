@@ -1,0 +1,353 @@
+/* ===================================================
+   1. RESET Y CONFIGURACIÓN GENERAL
+=================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: white;
+    min-height: 100vh;
+    overflow-x: hidden;
+    background-color: #0d0d11; /* Fallback oscuro */
+}
+
+/* Imagen de fondo sutilmente difuminada */
+.fondo-blur {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100vh; z-index: -1;
+    background-image: url('imagenes/descarga.jpg'); /* Archivo local */
+    background-size: cover; background-position: center;
+    filter: blur(3px); transform: scale(1.05); 
+}
+
+.fondo-blur::before {
+    content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background-color: rgba(10, 10, 12, 0.75); /* Capa oscura para contraste */
+}
+
+/* Contenedor Flexbox */
+.contenido-centrado {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 40px 20px;
+}
+
+/* ===================================================
+   2. TARJETA DE PERFIL MAJESTUOSA Y MÁS GRANDE
+=================================================== */
+.perfil-card-gigante {
+    background: rgba(255, 255, 255, 0.04); 
+    backdrop-filter: blur(10px); 
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 50px 35px 70px 35px;
+    border-radius: 24px; 
+    box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.6);
+    width: 100%;
+    max-width: 550px;
+
+    /* Activación de la animación de entrada */
+    animation: entradaSuave 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+/* Estilos para la foto de perfil circular */
+.contenedor-avatar {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.avatar-img {
+    width: 110px;  /* Tamaño ideal para la tarjeta estrecha */
+    height: 110px;
+    border-radius: 50%; /* Hace la imagen perfectamente circular */
+    object-fit: cover; /* Evita que la foto se deforme al recortarla */
+    border: 3px solid rgba(255, 255, 255, 0.15); /* Borde sutil elegante */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5); /* Sombra para dar profundidad */
+}
+
+.perfil-card-gigante h1 { 
+    font-size: 2.4rem; /* Título más grande */
+    margin-bottom: 8px; 
+    text-align: center; 
+    letter-spacing: 0.5px;
+}
+
+.perfil-card-gigante p { 
+    font-size: 1rem; /* Subtítulo con más cuerpo */
+    color: #aaa; 
+    margin-bottom: 40px; 
+    text-align: center; 
+}
+
+.enlaces-contenedor { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 25px; /* Más separación entre redes */
+}
+
+.fila-red { 
+    display: flex; 
+    align-items: center; 
+    gap: 25px; /* Más separación entre el recuadro y el texto de la cuenta */
+}
+
+/* Recuadro de logo escalado a un tamaño superior */
+.recuadro-logo {
+    position: relative; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    width: 70px;  /* Escalado de 60px a 70px */
+    height: 70px; 
+    min-width: 70px; 
+    min-height: 70px; 
+    background-color: rgba(255, 255, 255, 0.03);
+    text-decoration: none; 
+    transition: transform 0.2s ease, background-color 0.2s ease; 
+    cursor: pointer;
+}
+
+/* Esquina Superior Izquierda (Diseño de recuadro cian) */
+.recuadro-logo::before {
+    content: ""; position: absolute; top: 0; left: 0; width: 18px; height: 18px; 
+    border-top: 2px solid #00bcd4; border-left: 2px solid #00bcd4;
+}
+
+/* Esquina Inferior Derecha (Diseño de recuadro cian) */
+.recuadro-logo::after {
+    content: ""; position: absolute; bottom: 0; right: 0; width: 18px; height: 18px; 
+    border-bottom: 2px solid #00bcd4; border-right: 2px solid #00bcd4;
+}
+
+/* Las imágenes locales ahora se adaptan al nuevo tamaño más grande */
+.logo-red { 
+    width: 38px;  /* Escalado de 32px a 38px */
+    height: 38px; 
+    object-fit: contain; 
+}
+
+/* Efecto visual al pasar el cursor */
+.recuadro-logo:hover { 
+    transform: scale(1.06); 
+    background-color: rgba(0, 188, 212, 0.1); 
+}
+
+.nombre-cuenta { 
+    font-size: 1.45rem; /* 🔴 Aumentado de 1.2rem a 1.45rem para que las letras sean más grandes y visibles */
+    font-weight: 600;   /* Ajustado a un grosor semi-bold para que destaque más junto al logo */
+    color: #e5e5e7; 
+    letter-spacing: 0.3px; /* Añade un ligero espacio entre letras para mejorar la legibilidad */
+}
+
+/* ===================================================
+   3. 🔴 EFECTO NEÓN RGB AL PASAR EL RATÓN (HOVER)
+=================================================== */
+
+.recuadro-logo:hover {
+    transform: scale(1.06);
+    background-color: rgba(255, 255, 255, 0.07);
+}
+
+/* Al pasar el ratón, activa el brillo neón e inicia la transición de colores RGB */
+.recuadro-logo:hover::before,
+.recuadro-logo:hover::after {
+    animation: neonRGB 4s linear infinite;
+    /* drop-shadow aplica el brillo exterior exacto simulando un tubo de neón */
+    filter: drop-shadow(0 0 8px currentColor); 
+}
+
+/* Animación que cambia suavemente el color del borde y el neón */
+@keyframes neonRGB {
+    0% {
+        border-color: #00bcd4; /* Cian */
+        color: #00bcd4;
+    }
+    25% {
+        border-color: #b026ff; /* Morado neón */
+        color: #b026ff;
+    }
+    50% {
+        border-color: #ff007f; /* Rosa/Magenta */
+        color: #ff007f;
+    }
+    75% {
+        border-color: #1f51ff; /* Azul eléctrico */
+        color: #1f51ff;
+    }
+    100% {
+        border-color: #00bcd4; /* Vuelve al cian */
+        color: #00bcd4;
+    }
+}
+
+/* ===================================================
+   3. 🔴 LÓGICA DE LA ANIMACIÓN DE ENTRADA
+=================================================== */
+@keyframes entradaSuave {
+    0% {
+        opacity: 0;
+        /* Comienza 50px más abajo */
+        transform: translateY(50px);
+        /* Inicia ligeramente más borrosa para un efecto de enfoque */
+        filter: blur(10px);
+    }
+    100% {
+        opacity: 1;
+        /* Sube a su posición original */
+        transform: translateY(0);
+        /* Recupera la nitidez total */
+        filter: blur(0);
+    }
+}
+
+/* ===================================================
+   4. 🔴 NUEVO: BOTÓN DE COLABORADORES
+=================================================== */
+.contenedor-colaboradores-btn {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding-top: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+.btn-colaboradores {
+    background-color: rgba(255, 255, 255, 0.06);
+    color: #e5e5e7;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    padding: 14px 28px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: background-color 0.2s, transform 0.2s, border-color 0.2s;
+    width: 100%;
+    justify-content: center;
+}
+
+.btn-colaboradores:hover {
+    background-color: rgba(0, 188, 212, 0.1);
+    border-color: #00bcd4;
+    transform: translateY(-2px);
+    color: #fff;
+}
+
+/* ===================================================
+   5. 🔴 NUEVO: VENTANA FLOTANTE (MODAL) DE COLABORADORES
+=================================================== */
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tarjeta-modal-contenido {
+    background: rgba(20, 20, 25, 0.95);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    width: 90%;
+    max-width: 400px; /* Diseño móvil estilizado */
+    border-radius: 20px;
+    padding: 30px 25px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding-bottom: 10px;
+}
+
+.modal-header h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.btn-cerrar-modal {
+    background: none;
+    border: none;
+    color: #aaa;
+    font-size: 2.2rem;
+    cursor: pointer;
+    line-height: 0.5;
+    transition: color 0.2s;
+}
+
+.btn-cerrar-modal:hover { color: white; }
+
+.lista-colaboradores {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.item-colaborador {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: rgba(255, 255, 255, 0.02);
+    padding: 15px;
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.avatar-colaborador {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.info-colaborador h3 {
+    font-size: 1.1rem;
+    margin-bottom: 6px;
+    color: #fff;
+}
+
+/* Botones de iconos de redes de los colaboradores */
+.redes-colaborador {
+    display: flex;
+    gap: 12px;
+}
+
+.redes-colaborador a {
+    color: #aaa;
+    font-size: 1.2rem;
+    text-decoration: none;
+    transition: color 0.2s, transform 0.2s;
+}
+
+.redes-colaborador a:hover {
+    color: #00bcd4;
+    transform: scale(1.15);
+}
+
+.hidden { display: none !important; }
+
+/* 🔴 NUEVO: Efecto hover para el avatar interactivo del colaborador */
+.enlace-avatar-colaborador {
+    display: inline-block;
+    border-radius: 50%;
+    overflow: hidden;
+    transition: transform 0.2s ease;
+}
+
+.enlace-avatar-colaborador:hover {
+    transform: scale(1.08); /* Pequeño zoom al pasar el ratón */
+}
