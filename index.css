@@ -12,10 +12,9 @@ body {
     color: white;
     min-height: 100vh;
     overflow-x: hidden;
-    background-color: #0d0d11; /* Fallback oscuro */
+    background-color: #0d0d11;
 }
 
-/* Imagen de fondo sutilmente difuminada */
 .fondo-blur {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100vh; z-index: -1;
@@ -29,7 +28,6 @@ body {
     background-color: rgba(10, 10, 12, 0.75); /* Capa oscura para contraste */
 }
 
-/* Contenedor Flexbox */
 .contenido-centrado {
     display: flex;
     align-items: center;
@@ -39,7 +37,7 @@ body {
 }
 
 /* ===================================================
-   2. TARJETA DE PERFIL MAJESTUOSA Y MÁS GRANDE
+   2. PERFIL
 =================================================== */
 .perfil-card-gigante {
     background: rgba(255, 255, 255, 0.04); 
@@ -51,11 +49,11 @@ body {
     width: 100%;
     max-width: 550px;
 
-    /* Activación de la animación de entrada */
+    /* Activación de la animación */
     animation: entradaSuave 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
 }
 
-/* Estilos para la foto de perfil circular */
+/* Estilos para la foto de perfil */
 .contenedor-avatar {
     display: flex;
     justify-content: center;
@@ -88,7 +86,7 @@ body {
 .enlaces-contenedor { 
     display: flex; 
     flex-direction: column; 
-    gap: 25px; /* Más separación entre redes */
+    gap: 25px;
 }
 
 .fila-red { 
@@ -125,7 +123,6 @@ body {
     border-bottom: 2px solid #00bcd4; border-right: 2px solid #00bcd4;
 }
 
-/* Las imágenes locales ahora se adaptan al nuevo tamaño más grande */
 .logo-red { 
     width: 38px;  /* Escalado de 32px a 38px */
     height: 38px; 
@@ -146,7 +143,7 @@ body {
 }
 
 /* ===================================================
-   3. 🔴 EFECTO NEÓN RGB AL PASAR EL RATÓN (HOVER)
+   3. EFECTO AL PASAR EL RATÓN
 =================================================== */
 
 .recuadro-logo:hover {
@@ -154,7 +151,7 @@ body {
     background-color: rgba(255, 255, 255, 0.07);
 }
 
-/* Al pasar el ratón, activa el brillo neón e inicia la transición de colores RGB */
+/* Al pasar el ratón, lo activa */
 .recuadro-logo:hover::before,
 .recuadro-logo:hover::after {
     animation: neonRGB 4s linear infinite;
@@ -162,7 +159,7 @@ body {
     filter: drop-shadow(0 0 8px currentColor); 
 }
 
-/* Animación que cambia suavemente el color del borde y el neón */
+/* Animación que cambia suavemente el color del borde */
 @keyframes neonRGB {
     0% {
         border-color: #00bcd4; /* Cian */
@@ -187,7 +184,7 @@ body {
 }
 
 /* ===================================================
-   3. 🔴 LÓGICA DE LA ANIMACIÓN DE ENTRADA
+   3. LÓGICA DE LA ANIMACIÓN DE ENTRADA
 =================================================== */
 @keyframes entradaSuave {
     0% {
@@ -207,7 +204,7 @@ body {
 }
 
 /* ===================================================
-   4. 🔴 NUEVO: BOTÓN DE COLABORADORES
+   4. BOTÓN DE COLABORADORES
 =================================================== */
 .contenedor-colaboradores-btn {
     border-top: 1px solid rgba(255, 255, 255, 0.08);
@@ -241,7 +238,7 @@ body {
 }
 
 /* ===================================================
-   5. 🔴 NUEVO: VENTANA FLOTANTE (MODAL) DE COLABORADORES
+   5. VENTANA FLOTANTE (MODAL) DE COLABORADORES
 =================================================== */
 .modal-overlay {
     position: fixed;
@@ -320,7 +317,7 @@ body {
     color: #fff;
 }
 
-/* Botones de iconos de redes de los colaboradores */
+/* Botones para los iconos */
 .redes-colaborador {
     display: flex;
     gap: 12px;
@@ -340,7 +337,7 @@ body {
 
 .hidden { display: none !important; }
 
-/* 🔴 NUEVO: Efecto hover para el avatar interactivo del colaborador */
+/* Efecto para el avatar */
 .enlace-avatar-colaborador {
     display: inline-block;
     border-radius: 50%;
