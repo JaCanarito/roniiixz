@@ -15,7 +15,7 @@
         
         <!-- Tarjeta de presentación más grande -->
         <div class="perfil-card-gigante">
-            <!-- 🔴 NUEVO: Foto de perfil circular -->
+            <!-- Foto de perfil -->
             <div class="contenedor-avatar">
                 <img src="imagenes/ronix.jpg" alt="Foto de perfil" class="avatar-img">
             </div>
@@ -64,7 +64,7 @@
                     <span class="nombre-cuenta">Discord / Roniiixz Community</span>
                 </div>
 
-                <!-- 🔴 NUEVO: Botón de Colaboradores -->
+                <!-- Botón de Colaboradores -->
                 <div class="contenedor-colaboradores-btn">
                     <button class="btn-colaboradores" onclick="abrirColaboradores()">
                         <i class="fa-solid fa-users"></i> Colaboradores
@@ -76,7 +76,7 @@
         </div>
     </main>
 
-    <!-- VENTANA FLOTANTE (TARJETA DE COLABORADORES) -->
+    <!-- 2º VENTANA -->
     <div id="modalColaboradores" class="modal-overlay hidden">
         <div class="tarjeta-modal-contenido">
             
@@ -87,9 +87,7 @@
 
             <div class="lista-colaboradores">
                 
-                <!-- Colaborador 1 -->
                 <div class="item-colaborador">
-                    <!-- 🔴 NUEVO: El avatar ahora es un enlace a su Twitch -->
                     <a href="https://www.tiktok.com/@eelfeergaa6" target="_blank" class="enlace-avatar-colaborador">
                         <img src="imagenes/fergita.jpeg" alt="Colaborador 1" class="avatar-colaborador" onerror="this.src='perfil.png'">
                     </a>
@@ -103,9 +101,7 @@
                     </div>
                 </div>
 
-                <!-- Colaborador 2 -->
                 <div class="item-colaborador">
-                    <!-- 🔴 NUEVO: El avatar ahora es un enlace a su YouTube -->
                     <a href="https://www.tiktok.com/@mauroortiz444" target="_blank" class="enlace-avatar-colaborador">
                         <img src="imagenes/mauro.jpeg" alt="Colaborador 2" class="avatar-colaborador" onerror="this.src='perfil.png'">
                     </a>
@@ -118,9 +114,7 @@
                     </div>
                 </div>
 
-                <!-- Colaborador 3 -->
                 <div class="item-colaborador">
-                    <!-- 🔴 NUEVO: El avatar ahora es un enlace a su YouTube -->
                     <a href="https://www.tiktok.com/@javiblanco.8" target="_blank" class="enlace-avatar-colaborador">
                         <img src="imagenes/javi.jpeg" alt="Colaborador 2" class="avatar-colaborador" onerror="this.src='perfil.png'">
                     </a>
@@ -138,7 +132,7 @@
         </div>
     </div>
 
-    <!-- Script rápido para abrir/cerrar la tarjeta de colaboradores -->
+    <!-- Script para abrir/cerrar la 2º ventana -->
     <script>
         function abrirColaboradores() {
             document.getElementById('modalColaboradores').classList.remove('hidden');
