@@ -12,9 +12,10 @@ body {
     color: white;
     min-height: 100vh;
     overflow-x: hidden;
-    background-color: #0d0d11;
+    background-color: #0d0d11; /* Fallback oscuro */
 }
 
+/* Imagen de fondo sutilmente difuminada */
 .fondo-blur {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100vh; z-index: -1;
@@ -28,6 +29,7 @@ body {
     background-color: rgba(10, 10, 12, 0.75); /* Capa oscura para contraste */
 }
 
+/* Contenedor Flexbox */
 .contenido-centrado {
     display: flex;
     align-items: center;
@@ -37,7 +39,7 @@ body {
 }
 
 /* ===================================================
-   2. PERFIL
+   2. TARJETA DE PERFIL MAJESTUOSA Y MÁS GRANDE
 =================================================== */
 .perfil-card-gigante {
     background: rgba(255, 255, 255, 0.04); 
@@ -49,11 +51,11 @@ body {
     width: 100%;
     max-width: 550px;
 
-    /* Activación de la animación */
+    /* Activación de la animación de entrada */
     animation: entradaSuave 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
 }
 
-/* Estilos para la foto de perfil */
+/* Estilos para la foto de perfil circular */
 .contenedor-avatar {
     display: flex;
     justify-content: center;
@@ -86,7 +88,7 @@ body {
 .enlaces-contenedor { 
     display: flex; 
     flex-direction: column; 
-    gap: 25px;
+    gap: 25px; /* Más separación entre redes */
 }
 
 .fila-red { 
@@ -123,6 +125,7 @@ body {
     border-bottom: 2px solid #00bcd4; border-right: 2px solid #00bcd4;
 }
 
+/* Las imágenes locales ahora se adaptan al nuevo tamaño más grande */
 .logo-red { 
     width: 38px;  /* Escalado de 32px a 38px */
     height: 38px; 
@@ -143,7 +146,7 @@ body {
 }
 
 /* ===================================================
-   3. EFECTO AL PASAR EL RATÓN
+   3. 🔴 EFECTO NEÓN RGB AL PASAR EL RATÓN (HOVER)
 =================================================== */
 
 .recuadro-logo:hover {
@@ -151,7 +154,7 @@ body {
     background-color: rgba(255, 255, 255, 0.07);
 }
 
-/* Al pasar el ratón, lo activa */
+/* Al pasar el ratón, activa el brillo neón e inicia la transición de colores RGB */
 .recuadro-logo:hover::before,
 .recuadro-logo:hover::after {
     animation: neonRGB 4s linear infinite;
@@ -159,7 +162,7 @@ body {
     filter: drop-shadow(0 0 8px currentColor); 
 }
 
-/* Animación que cambia suavemente el color del borde */
+/* Animación que cambia suavemente el color del borde y el neón */
 @keyframes neonRGB {
     0% {
         border-color: #00bcd4; /* Cian */
@@ -184,7 +187,7 @@ body {
 }
 
 /* ===================================================
-   3. LÓGICA DE LA ANIMACIÓN DE ENTRADA
+   3. 🔴 LÓGICA DE LA ANIMACIÓN DE ENTRADA
 =================================================== */
 @keyframes entradaSuave {
     0% {
@@ -204,7 +207,7 @@ body {
 }
 
 /* ===================================================
-   4. BOTÓN DE COLABORADORES
+   4. 🔴 NUEVO: BOTÓN DE COLABORADORES
 =================================================== */
 .contenedor-colaboradores-btn {
     border-top: 1px solid rgba(255, 255, 255, 0.08);
@@ -238,7 +241,7 @@ body {
 }
 
 /* ===================================================
-   5. VENTANA FLOTANTE (MODAL) DE COLABORADORES
+   5. 🔴 NUEVO: VENTANA FLOTANTE (MODAL) DE COLABORADORES
 =================================================== */
 .modal-overlay {
     position: fixed;
@@ -317,7 +320,7 @@ body {
     color: #fff;
 }
 
-/* Botones para los iconos */
+/* Botones de iconos de redes de los colaboradores */
 .redes-colaborador {
     display: flex;
     gap: 12px;
@@ -337,7 +340,7 @@ body {
 
 .hidden { display: none !important; }
 
-/* Efecto para el avatar */
+/* 🔴 NUEVO: Efecto hover para el avatar interactivo del colaborador */
 .enlace-avatar-colaborador {
     display: inline-block;
     border-radius: 50%;
@@ -347,4 +350,425 @@ body {
 
 .enlace-avatar-colaborador:hover {
     transform: scale(1.08); /* Pequeño zoom al pasar el ratón */
+}
+
+/* ===== Mejoras visuales: avatar, 3D y transiciones ===== */
+.contenido-centrado { perspective: 1200px; }
+
+.perfil-card-gigante {
+    transform: rotateX(var(--rotate-x, 0deg)) rotateY(var(--rotate-y, 0deg));
+    transform-style: preserve-3d;
+    will-change: transform, opacity, filter;
+    transition: transform 420ms cubic-bezier(.2,.75,.25,1),
+                box-shadow 420ms ease, border-color 420ms ease;
+}
+.perfil-card-gigante:hover {
+    box-shadow: 0 24px 65px rgba(0,0,0,.58), 0 0 28px rgba(0,188,212,.08);
+    border-color: rgba(0,188,212,.22);
+}
+
+/* Movimiento pequeño y continuo de la foto de perfil. */
+.avatar-img {
+    animation: avatarFlotante 4.5s ease-in-out infinite;
+    transition: box-shadow 350ms ease, border-color 350ms ease;
+}
+.avatar-img:hover {
+    border-color: rgba(0,188,212,.75);
+    box-shadow: 0 0 0 5px rgba(0,188,212,.08), 0 0 26px rgba(0,188,212,.28);
+}
+@keyframes avatarFlotante {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-5px) scale(1.025); }
+}
+
+/* Entrada inicial más cinematográfica y contenido escalonado. */
+.perfil-card-gigante {
+    animation: entradaPremium 950ms cubic-bezier(.16,1,.3,1) both;
+}
+.perfil-card-gigante .contenedor-avatar,
+.perfil-card-gigante h1,
+.perfil-card-gigante > p,
+.perfil-card-gigante .fila-red,
+.perfil-card-gigante .contenedor-colaboradores-btn {
+    opacity: 0;
+    animation: contenidoEntrada 700ms cubic-bezier(.16,1,.3,1) forwards;
+}
+.perfil-card-gigante .contenedor-avatar { animation-delay: 160ms; }
+.perfil-card-gigante h1 { animation-delay: 260ms; }
+.perfil-card-gigante > p { animation-delay: 320ms; }
+.perfil-card-gigante .fila-red:nth-child(1) { animation-delay: 380ms; }
+.perfil-card-gigante .fila-red:nth-child(2) { animation-delay: 450ms; }
+.perfil-card-gigante .fila-red:nth-child(3) { animation-delay: 520ms; }
+.perfil-card-gigante .fila-red:nth-child(4) { animation-delay: 590ms; }
+.perfil-card-gigante .fila-red:nth-child(5) { animation-delay: 660ms; }
+.perfil-card-gigante .contenedor-colaboradores-btn { animation-delay: 740ms; }
+
+@keyframes entradaPremium {
+    from { opacity: 0; transform: translateY(34px) scale(.965); filter: blur(9px); }
+    to {
+        opacity: 1;
+        transform: rotateX(var(--rotate-x, 0deg)) rotateY(var(--rotate-y, 0deg)) translateY(0) scale(1);
+        filter: blur(0);
+    }
+}
+@keyframes contenidoEntrada {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Apertura/cierre animado de la ventana de colaboradores. */
+.modal-overlay {
+    opacity: 0;
+    background: rgba(5,5,9,.78);
+    backdrop-filter: blur(9px);
+    -webkit-backdrop-filter: blur(9px);
+    transition: opacity 240ms ease;
+}
+.modal-overlay.modal-abriendo { opacity: 1; }
+.modal-overlay.modal-cerrando { opacity: 0; pointer-events: none; }
+
+/* La tarjeta grande de colaboradores entra con zoom, desenfoque y rebote suave. */
+.tarjeta-modal-contenido {
+    opacity: 0;
+    transform: translateY(38px) scale(.88) rotateX(7deg);
+    transform-origin: center center;
+    filter: blur(10px);
+    will-change: opacity, transform, filter;
+}
+
+.modal-abriendo .tarjeta-modal-contenido {
+    animation: tarjetaColaboradoresEntrada 620ms cubic-bezier(.16, 1, .3, 1) both;
+}
+
+.modal-cerrando .tarjeta-modal-contenido {
+    animation: tarjetaColaboradoresSalida 230ms cubic-bezier(.4, 0, 1, 1) both;
+}
+
+@keyframes tarjetaColaboradoresEntrada {
+    0% {
+        opacity: 0;
+        transform: translateY(38px) scale(.88) rotateX(7deg);
+        filter: blur(10px);
+    }
+    65% {
+        opacity: 1;
+        transform: translateY(-5px) scale(1.015) rotateX(0);
+        filter: blur(0);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1) rotateX(0);
+        filter: blur(0);
+    }
+}
+
+@keyframes tarjetaColaboradoresSalida {
+    from {
+        opacity: 1;
+        transform: translateY(0) scale(1) rotateX(0);
+        filter: blur(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(18px) scale(.94) rotateX(-3deg);
+        filter: blur(6px);
+    }
+}
+
+/* Los colaboradores aparecen uno tras otro y reaccionan al cursor. */
+.item-colaborador {
+    opacity: 0;
+    transform: translateX(-12px);
+    transition: opacity 350ms ease, transform 350ms cubic-bezier(.2,.75,.25,1),
+                background-color 220ms ease, border-color 220ms ease;
+}
+.modal-abriendo .item-colaborador { opacity: 1; transform: translateX(0); }
+.modal-abriendo .item-colaborador:nth-child(1) { transition-delay: 90ms; }
+.modal-abriendo .item-colaborador:nth-child(2) { transition-delay: 160ms; }
+.modal-abriendo .item-colaborador:nth-child(3) { transition-delay: 230ms; }
+.item-colaborador:hover {
+    background: rgba(0,188,212,.075);
+    border-color: rgba(0,188,212,.22);
+    transform: translateX(4px);
+}
+.enlace-avatar-colaborador img {
+    display: block;
+    transition: transform 300ms ease, filter 300ms ease;
+}
+.enlace-avatar-colaborador:hover img { transform: scale(1.1); filter: saturate(1.15); }
+body.modal-abierto { overflow: hidden; }
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+        scroll-behavior: auto !important;
+    }
+    .perfil-card-gigante { transform: none !important; }
+}
+@media (max-width: 700px) {
+    .perfil-card-gigante { transform: none !important; will-change: auto; }
+}
+
+
+/* =========================================================
+   TRANSICIÓN PREMIUM DE LA TARJETA GRANDE DE COLABORADORES
+   ========================================================= */
+
+/* La tarjeta entra con perspectiva, rebote suave y un brillo diagonal. */
+.tarjeta-modal-contenido {
+    position: relative;
+    overflow: hidden;
+    transform-origin: 50% 35%;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    will-change: transform, opacity, filter;
+    border-color: rgba(0, 188, 212, 0.18);
+    box-shadow:
+        0 18px 55px rgba(0, 0, 0, 0.62),
+        0 0 0 1px rgba(0, 188, 212, 0.04),
+        0 0 32px rgba(0, 188, 212, 0.08);
+}
+
+.tarjeta-modal-contenido::before {
+    content: "";
+    position: absolute;
+    inset: -45% auto -45% -70%;
+    width: 42%;
+    pointer-events: none;
+    opacity: 0;
+    transform: rotate(22deg);
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.10),
+        rgba(0, 188, 212, 0.12),
+        transparent
+    );
+}
+
+.modal-abriendo .tarjeta-modal-contenido {
+    animation: colaboradoresEntrada 650ms cubic-bezier(.16, 1, .3, 1) both;
+}
+
+.modal-abriendo .tarjeta-modal-contenido::before {
+    animation: brilloTarjetaColaboradores 850ms ease-out 120ms both;
+}
+
+.modal-cerrando .tarjeta-modal-contenido {
+    animation: colaboradoresSalida 220ms cubic-bezier(.4, 0, 1, 1) both;
+}
+
+@keyframes colaboradoresEntrada {
+    0% {
+        opacity: 0;
+        transform: perspective(1000px) translateY(42px) scale(.82) rotateX(13deg);
+        filter: blur(12px);
+    }
+    65% {
+        opacity: 1;
+        transform: perspective(1000px) translateY(-5px) scale(1.015) rotateX(-1deg);
+        filter: blur(0);
+    }
+    100% {
+        opacity: 1;
+        transform: perspective(1000px) translateY(0) scale(1) rotateX(0);
+        filter: blur(0);
+    }
+}
+
+@keyframes colaboradoresSalida {
+    from {
+        opacity: 1;
+        transform: perspective(1000px) translateY(0) scale(1) rotateX(0);
+        filter: blur(0);
+    }
+    to {
+        opacity: 0;
+        transform: perspective(1000px) translateY(24px) scale(.91) rotateX(-7deg);
+        filter: blur(7px);
+    }
+}
+
+@keyframes brilloTarjetaColaboradores {
+    0% {
+        left: -70%;
+        opacity: 0;
+    }
+    20% { opacity: 1; }
+    100% {
+        left: 135%;
+        opacity: 0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .modal-abriendo .tarjeta-modal-contenido,
+    .modal-cerrando .tarjeta-modal-contenido,
+    .modal-abriendo .tarjeta-modal-contenido::before {
+        animation: none !important;
+    }
+    .tarjeta-modal-contenido {
+        opacity: 1;
+        transform: none;
+        filter: none;
+    }
+}
+
+
+/* =========================================================
+   PALETA DESTACADA PARA TODAS LAS MEJORAS NUEVAS
+   Cian eléctrico + violeta intenso + halo luminoso
+   ========================================================= */
+
+:root {
+    --nuevo-cyan: #00E5FF;
+    --nuevo-cyan-claro: #8AF4FF;
+    --nuevo-violeta: #A855F7;
+    --nuevo-magenta: #F04BFF;
+    --nuevo-glow-cyan: rgba(0, 229, 255, .38);
+    --nuevo-glow-violeta: rgba(168, 85, 247, .34);
+}
+
+/* Tarjeta principal: borde degradado y reflejo de color más visible. */
+.perfil-card-gigante {
+    border: 1px solid rgba(0, 229, 255, .48) !important;
+    box-shadow:
+        0 22px 70px rgba(0, 0, 0, .62),
+        0 0 0 1px rgba(168, 85, 247, .16),
+        0 0 28px var(--nuevo-glow-cyan),
+        0 0 58px rgba(168, 85, 247, .16) !important;
+}
+.perfil-card-gigante:hover {
+    border-color: var(--nuevo-cyan) !important;
+    box-shadow:
+        0 26px 78px rgba(0, 0, 0, .68),
+        0 0 22px var(--nuevo-glow-cyan),
+        0 0 52px var(--nuevo-glow-violeta) !important;
+}
+
+/* Avatar: anillo degradado brillante, sin cambiar la imagen. */
+.avatar-img {
+    border: 2px solid var(--nuevo-cyan) !important;
+    box-shadow:
+        0 0 0 4px rgba(0, 229, 255, .12),
+        0 0 20px var(--nuevo-glow-cyan),
+        0 0 34px rgba(168, 85, 247, .24) !important;
+}
+.avatar-img:hover {
+    border-color: var(--nuevo-magenta) !important;
+    box-shadow:
+        0 0 0 5px rgba(240, 75, 255, .15),
+        0 0 26px rgba(240, 75, 255, .48),
+        0 0 44px var(--nuevo-glow-violeta) !important;
+}
+
+/* Botón de colaboradores: destaca como acción principal. */
+.contenedor-colaboradores-btn button,
+.contenedor-colaboradores-btn a,
+#btnColaboradores {
+    border: 1px solid rgba(0, 229, 255, .62) !important;
+    background: linear-gradient(105deg,
+        rgba(0, 229, 255, .16),
+        rgba(168, 85, 247, .22),
+        rgba(240, 75, 255, .13)) !important;
+    color: #FFFFFF !important;
+    box-shadow:
+        inset 0 0 18px rgba(0, 229, 255, .07),
+        0 0 16px rgba(0, 229, 255, .16) !important;
+    transition: background 260ms ease, box-shadow 260ms ease,
+                border-color 260ms ease, transform 260ms ease !important;
+}
+.contenedor-colaboradores-btn button:hover,
+.contenedor-colaboradores-btn a:hover,
+#btnColaboradores:hover {
+    border-color: var(--nuevo-cyan) !important;
+    background: linear-gradient(105deg,
+        rgba(0, 229, 255, .28),
+        rgba(168, 85, 247, .34),
+        rgba(240, 75, 255, .24)) !important;
+    box-shadow:
+        0 0 22px rgba(0, 229, 255, .34),
+        0 0 38px rgba(168, 85, 247, .22) !important;
+    transform: translateY(-2px);
+}
+
+/* Tarjeta grande del modal: borde cian/violeta y halo más intenso. */
+.tarjeta-modal-contenido {
+    border: 1px solid rgba(0, 229, 255, .48) !important;
+    box-shadow:
+        0 24px 75px rgba(0, 0, 0, .72),
+        0 0 0 1px rgba(168, 85, 247, .2),
+        0 0 26px rgba(0, 229, 255, .22),
+        0 0 58px rgba(168, 85, 247, .22) !important;
+}
+.modal-abriendo .tarjeta-modal-contenido {
+    border-color: var(--nuevo-cyan) !important;
+}
+
+/* Destello de la tarjeta más visible y con mezcla de cian y violeta. */
+.tarjeta-modal-contenido::before {
+    width: 48%;
+    background: linear-gradient(90deg,
+        transparent,
+        rgba(0, 229, 255, .22),
+        rgba(255, 255, 255, .30),
+        rgba(168, 85, 247, .28),
+        transparent) !important;
+}
+
+/* Filas de colaboradores: borde y fondo con color al interactuar. */
+.item-colaborador {
+    border: 1px solid rgba(168, 85, 247, .18);
+    background: rgba(168, 85, 247, .045);
+}
+.item-colaborador:hover {
+    border-color: rgba(0, 229, 255, .72) !important;
+    background: linear-gradient(100deg,
+        rgba(0, 229, 255, .13),
+        rgba(168, 85, 247, .16)) !important;
+    box-shadow:
+        0 0 18px rgba(0, 229, 255, .14),
+        inset 0 0 14px rgba(168, 85, 247, .08);
+}
+
+/* Iconos/fotos de colaboradores con un halo que aparece al pasar el ratón. */
+.enlace-avatar-colaborador img {
+    border: 1px solid rgba(0, 229, 255, .30);
+    box-shadow: 0 0 10px rgba(0, 229, 255, .10);
+}
+.enlace-avatar-colaborador:hover img {
+    border-color: var(--nuevo-magenta);
+    box-shadow:
+        0 0 0 3px rgba(240, 75, 255, .12),
+        0 0 20px rgba(240, 75, 255, .38);
+}
+
+/* Títulos y pequeños acentos de las nuevas tarjetas. */
+.tarjeta-modal-contenido h2 {
+    color: #FFFFFF;
+    text-shadow:
+        0 0 10px rgba(0, 229, 255, .34),
+        0 0 22px rgba(168, 85, 247, .22);
+}
+.tarjeta-modal-contenido h2::after {
+    content: "";
+    display: block;
+    width: 54px;
+    height: 3px;
+    margin: 10px auto 0;
+    border-radius: 99px;
+    background: linear-gradient(90deg, var(--nuevo-cyan), var(--nuevo-violeta), var(--nuevo-magenta));
+    box-shadow: 0 0 12px var(--nuevo-glow-cyan);
+}
+
+/* Focus visible para teclado, manteniendo el estilo de color. */
+.perfil-card-gigante a:focus-visible,
+.perfil-card-gigante button:focus-visible,
+.tarjeta-modal-contenido a:focus-visible,
+.tarjeta-modal-contenido button:focus-visible {
+    outline: 2px solid var(--nuevo-cyan) !important;
+    outline-offset: 4px;
+    box-shadow: 0 0 0 5px rgba(0, 229, 255, .16) !important;
 }
