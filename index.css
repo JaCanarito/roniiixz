@@ -772,3 +772,100 @@ body.modal-abierto { overflow: hidden; }
     outline-offset: 4px;
     box-shadow: 0 0 0 5px rgba(0, 229, 255, .16) !important;
 }
+
+
+/* =========================================================
+   CRÉDITO ANCLADO DENTRO DE LA TARJETA PRINCIPAL
+   ========================================================= */
+.perfil-card-gigante {
+    position: relative;
+    padding-bottom: 70px;
+}
+
+.creditos {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 22px;
+    z-index: 2;
+    padding: 0 12px;
+    color: rgba(220, 230, 238, 0.58);
+    font-size: 0.76rem;
+    font-weight: 400;
+    letter-spacing: 0.7px;
+    text-align: center;
+    pointer-events: none;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+    animation: creditoEntrada 900ms ease 900ms both;
+}
+
+.creditos a {
+    position: relative;
+    z-index: 3;
+    display: inline-block;
+    text-decoration: none;
+    pointer-events: auto;
+}
+
+.creditos a:hover span {
+    color: #FFFFFF;
+    text-shadow: 0 0 8px rgba(0, 229, 255, 0.8), 0 0 18px rgba(168, 85, 247, 0.55);
+}
+
+.creditos span {
+    color: #8AF4FF;
+    font-weight: 700;
+    text-shadow: 0 0 10px rgba(0, 229, 255, 0.42);
+}
+
+@keyframes creditoEntrada {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 700px) {
+    .creditos { bottom: 22px; font-size: 0.7rem; }
+    .perfil-card-gigante { padding-bottom: 70px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .creditos { animation: none; }
+}
+
+/* =========================================================
+   PREVISUALIZACIÓN FLOTANTE DE VÍDEO EN TWITCH (HOVER)
+   ========================================================= */
+.fila-twitch .recuadro-logo {
+    position: relative; /* Necesario para posicionar el vídeo respecto al icono */
+    z-index: 10;
+}
+
+.preview-twitch {
+    position: absolute;
+    bottom: 120%; /* Aparece justo encima del icono de Twitch */
+    left: 50%;
+    transform: translateX(-50%) translateY(10px) scale(0.92);
+    width: 240px; /* Tamaño del clip en pequeño */
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: 14px;
+    border: 2px solid var(--nuevo-cyan, #00E5FF);
+    box-shadow: 
+        0 14px 35px rgba(0, 0, 0, 0.85),
+        0 0 20px rgba(0, 229, 255, 0.45),
+        0 0 38px rgba(168, 85, 247, 0.3);
+    
+    /* Oculto por defecto sin bloquear clics */
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    z-index: 999;
+    transition: opacity 0.28s ease, transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.28s;
+}
+
+/* Al pasar el ratón por el logo de Twitch, el vídeo aparece con efecto flotante */
+.fila-twitch .recuadro-logo:hover .preview-twitch {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0) scale(1);
+}
