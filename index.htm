@@ -10,6 +10,11 @@
     <!-- Capa del fondo sutilmente difuminado -->
     <div class="fondo-blur"></div>
 
+    <!-- Fondo vivo y cursor personalizado -->
+    <canvas id="ambientParticles" class="ambient-particles" aria-hidden="true"></canvas>
+    <div class="cursor-glow" aria-hidden="true"></div>
+    <div class="cursor-ring" aria-hidden="true"><span></span></div>
+
     <!-- Contenedor principal que centra la tarjeta -->
     <main class="contenido-centrado">
         
@@ -188,6 +193,100 @@
         document.addEventListener('keydown', (event) => {
             if (event.key === 'Escape') cerrarColaboradores();
         });
+
+
+        // Cursor premium: seguimiento suavizado y respuesta contextual.
+        const cursorRing = document.querySelector('.cursor-ring');
+        const cursorGlow = document.querySelector('.cursor-glow');
+        const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+        if (finePointer && !reducedMotion && cursorRing && cursorGlow) {
+            let mouseX = innerWidth / 2, mouseY = innerHeight / 2;
+            let ringX = mouseX, ringY = mouseY;
+            document.addEventListener('pointermove', (event) => {
+                mouseX = event.clientX; mouseY = event.clientY;
+                cursorGlow.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0)`;
+                const target = event.target.closest('a, button, .recuadro-logo, .enlace-avatar-colaborador');
+                cursorRing.classList.toggle('cursor-hover', !!target);
+            }, { passive: true });
+            const moveCursor = () => {
+                ringX += (mouseX - ringX) * 0.19;
+                ringY += (mouseY - ringY) * 0.19;
+                cursorRing.style.transform = `translate3d(${ringX}px, ${ringY}px, 0)`;
+                requestAnimationFrame(moveCursor);
+            };
+            moveCursor();
+            document.addEventListener('pointerdown', () => cursorRing.classList.add('cursor-click'));
+            document.addEventListener('pointerup', () => cursorRing.classList.remove('cursor-click'));
+            document.addEventListener('pointerleave', () => cursorRing.classList.add('cursor-hidden'));
+            document.addEventListener('pointerenter', () => cursorRing.classList.remove('cursor-hidden'));
+        }
+
+        // Partículas ambientales ligeras, conectadas por líneas sutiles.
+        const particleCanvas = document.getElementById('ambientParticles');
+        const particleContext = particleCanvas && particleCanvas.getContext('2d');
+        if (particleCanvas && particleContext && !reducedMotion) {
+            let particles = [];
+            let width = 0, height = 0, frameId = 0;
+            const pointer = { x: -1000, y: -1000 };
+            const particleCount = Math.min(68, Math.max(28, Math.floor(innerWidth / 22)));
+            const resizeParticles = () => {
+                const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+                width = innerWidth; height = innerHeight;
+                particleCanvas.width = Math.floor(width * dpr);
+                particleCanvas.height = Math.floor(height * dpr);
+                particleCanvas.style.width = width + 'px';
+                particleCanvas.style.height = height + 'px';
+                particleContext.setTransform(dpr, 0, 0, dpr, 0, 0);
+                particles = Array.from({ length: particleCount }, () => ({
+                    x: Math.random() * width, y: Math.random() * height,
+                    vx: (Math.random() - .5) * .22, vy: (Math.random() - .5) * .22,
+                    r: Math.random() * 1.5 + .5,
+                    hue: Math.random() > .72 ? 270 : 185,
+                    alpha: Math.random() * .35 + .16
+                }));
+            };
+            const drawParticles = () => {
+                particleContext.clearRect(0, 0, width, height);
+                for (let i = 0; i < particles.length; i++) {
+                    const p = particles[i];
+                    const dx = p.x - pointer.x, dy = p.y - pointer.y;
+                    const distance = Math.hypot(dx, dy);
+                    if (distance < 105 && distance > 0) {
+                        p.x += dx / distance * .12;
+                        p.y += dy / distance * .12;
+                    }
+                    p.x += p.vx; p.y += p.vy;
+                    if (p.x < -10) p.x = width + 10; if (p.x > width + 10) p.x = -10;
+                    if (p.y < -10) p.y = height + 10; if (p.y > height + 10) p.y = -10;
+                    particleContext.beginPath();
+                    particleContext.fillStyle = `hsla(${p.hue}, 100%, 72%, ${p.alpha})`;
+                    particleContext.shadowBlur = 9;
+                    particleContext.shadowColor = p.hue === 185 ? 'rgba(0,229,255,.55)' : 'rgba(168,85,247,.5)';
+                    particleContext.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                    particleContext.fill();
+                    particleContext.shadowBlur = 0;
+                    for (let j = i + 1; j < particles.length; j++) {
+                        const q = particles[j];
+                        const lineDistance = Math.hypot(p.x - q.x, p.y - q.y);
+                        if (lineDistance < 105) {
+                            particleContext.beginPath();
+                            particleContext.strokeStyle = `rgba(0, 210, 235, ${(1 - lineDistance / 105) * .10})`;
+                            particleContext.lineWidth = .7;
+                            particleContext.moveTo(p.x, p.y); particleContext.lineTo(q.x, q.y);
+                            particleContext.stroke();
+                        }
+                    }
+                }
+                frameId = requestAnimationFrame(drawParticles);
+            };
+            window.addEventListener('pointermove', e => { pointer.x = e.clientX; pointer.y = e.clientY; }, { passive: true });
+            window.addEventListener('resize', resizeParticles, { passive: true });
+            document.addEventListener('visibilitychange', () => {
+                if (document.hidden) cancelAnimationFrame(frameId);
+                else if (!frameId || document.visibilityState === 'visible') { cancelAnimationFrame(frameId); drawParticles(); }
+            });
+            resizeParticles(); drawParticles();
+        }
     </script>
 </body>
 </html>

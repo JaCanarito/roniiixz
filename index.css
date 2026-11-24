@@ -869,3 +869,119 @@ body.modal-abierto { overflow: hidden; }
     visibility: visible;
     transform: translateX(-50%) translateY(0) scale(1);
 }
+
+/* =========================================================
+   CAPA VISUAL PREMIUM: PARTÍCULAS, BRILLOS Y CURSOR NEÓN
+   ========================================================= */
+.ambient-particles {
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    opacity: .72;
+}
+.contenido-centrado { position: relative; z-index: 1; }
+body::before, body::after {
+    content: ""; position: fixed; width: 38vw; height: 38vw; min-width: 260px; min-height: 260px;
+    border-radius: 50%; filter: blur(95px); opacity: .13; pointer-events: none; z-index: 0;
+    animation: orbitaLuz 18s ease-in-out infinite alternate;
+}
+body::before { top: -18vw; left: -13vw; background: #00dfff; }
+body::after { right: -16vw; bottom: -20vw; background: #922cff; animation-delay: -8s; }
+@keyframes orbitaLuz { from { transform: translate3d(0,0,0) scale(.9); } to { transform: translate3d(7vw,5vh,0) scale(1.12); } }
+
+/* Reflejo que recorre la tarjeta al pasar el ratón. */
+.perfil-card-gigante { isolation: isolate; }
+.perfil-card-gigante::before {
+    content: ""; position: absolute; inset: -60% auto -60% -75%; width: 42%;
+    transform: rotate(24deg); pointer-events: none; z-index: -1; opacity: 0;
+    background: linear-gradient(90deg, transparent, rgba(0,229,255,.08), rgba(255,255,255,.10), rgba(168,85,247,.08), transparent);
+}
+.perfil-card-gigante:hover::before { opacity: 1; animation: reflejoPerfil 1.15s ease-out; }
+@keyframes reflejoPerfil { from { left: -75%; } to { left: 145%; } }
+
+/* Los botones y redes tienen una respuesta más táctil. */
+.recuadro-logo { overflow: visible; }
+.recuadro-logo .logo-red { transition: transform .35s cubic-bezier(.2,.8,.2,1), filter .35s ease; }
+.recuadro-logo:hover .logo-red { transform: scale(1.16) rotate(-5deg); filter: drop-shadow(0 0 8px rgba(0,229,255,.55)); }
+.fila-red { transition: transform .32s cubic-bezier(.2,.8,.2,1); }
+.fila-red:hover { transform: translateX(5px); }
+.nombre-cuenta { transition: color .25s ease, text-shadow .25s ease; }
+.fila-red:hover .nombre-cuenta { color: #fff; text-shadow: 0 0 14px rgba(0,229,255,.32); }
+.btn-colaboradores { position: relative; overflow: hidden; }
+.btn-colaboradores::after {
+    content: ""; position: absolute; inset: 0; transform: translateX(-120%);
+    background: linear-gradient(105deg, transparent, rgba(255,255,255,.16), transparent);
+    transition: transform .65s ease; pointer-events: none;
+}
+.btn-colaboradores:hover::after { transform: translateX(120%); }
+
+/* Cursor circular personalizado, solo para ratón/trackpad. */
+@media (hover: hover) and (pointer: fine) {
+    html, body, a, button { cursor: none !important; }
+    .cursor-ring, .cursor-glow {
+        position: fixed; left: 0; top: 0; pointer-events: none; z-index: 99999;
+        border-radius: 50%; will-change: transform;
+    }
+    .cursor-ring {
+        width: 34px; height: 34px; margin: -17px 0 0 -17px;
+        border: 1px solid rgba(0,229,255,.9);
+        box-shadow: 0 0 12px rgba(0,229,255,.34), inset 0 0 9px rgba(168,85,247,.16);
+        transition: width .22s ease, height .22s ease, margin .22s ease, border-color .22s ease, box-shadow .22s ease, opacity .2s ease;
+    }
+    .cursor-ring span { position: absolute; width: 4px; height: 4px; border-radius: 50%; left: 50%; top: 50%; transform: translate(-50%,-50%); background: #fff; box-shadow: 0 0 8px #00e5ff, 0 0 15px #a855f7; }
+    .cursor-glow { width: 8px; height: 8px; margin: -4px; background: rgba(0,229,255,.95); box-shadow: 0 0 12px 4px rgba(0,229,255,.22); z-index: 99998; }
+    .cursor-ring.cursor-hover { width: 52px; height: 52px; margin: -26px 0 0 -26px; border-color: #d56bff; box-shadow: 0 0 18px rgba(168,85,247,.48), inset 0 0 12px rgba(0,229,255,.2); }
+    .cursor-ring.cursor-click { width: 25px; height: 25px; margin: -12.5px 0 0 -12.5px; }
+    .cursor-ring.cursor-hidden, .cursor-glow { opacity: 0; }
+    body:hover .cursor-glow { opacity: 1; }
+}
+@media (hover: none), (pointer: coarse) { .cursor-ring, .cursor-glow { display: none !important; } }
+@media (prefers-reduced-motion: reduce) {
+    .ambient-particles, body::before, body::after, .cursor-ring, .cursor-glow { display: none !important; }
+    .perfil-card-gigante:hover::before { animation: none !important; }
+}
+
+/* =========================================================
+   MEJORAS VISUALES (SIN LATIDO EN TWITCH)
+   ========================================================= */
+
+/* 1. Título principal con degradado animado cian/violeta */
+.perfil-card-gigante h1 {
+    background: linear-gradient(90deg, #ffffff 0%, #8AF4FF 35%, #c084fc 65%, #ffffff 100%);
+    background-size: 220% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: contenidoEntrada 700ms cubic-bezier(.16, 1, .3, 1) 260ms forwards,
+               flujoTextoNeon 6s linear infinite;
+}
+
+@keyframes flujoTextoNeon {
+    0% { background-position: 0% center; }
+    100% { background-position: 220% center; }
+}
+
+/* 2. Iluminación ambiental al pasar el ratón por cada red social */
+.fila-red {
+    position: relative;
+    padding: 8px 14px;
+    margin: -8px -14px;
+    border-radius: 16px;
+    border: 1px solid transparent;
+    transition: transform .32s cubic-bezier(.2, .8, .2, 1),
+                background .32s ease,
+                border-color .32s ease,
+                box-shadow .32s ease;
+}
+
+.fila-red:hover {
+    transform: translateX(6px);
+    background: linear-gradient(90deg, rgba(0, 229, 255, 0.08), rgba(168, 85, 247, 0.05), transparent);
+    border-color: rgba(0, 229, 255, 0.22);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+/* Respeto a la configuración de movimiento reducido */
+@media (prefers-reduced-motion: reduce) {
+    .perfil-card-gigante h1 {
+        animation: none !important;
+    }
+}
